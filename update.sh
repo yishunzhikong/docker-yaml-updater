@@ -59,7 +59,7 @@ log_message "INFO" "============================================================
 log_message "INFO" "开始清理未使用的 Docker 镜像..."
 
 # 清理未使用的镜像
-docker image prune -a -f
+docker image prune -a -f 2>&1 | tee -a "$LOG_FILE"
 
 # 检查是否有清理操作的错误
 if [ $? -eq 0 ]; then
