@@ -45,7 +45,7 @@ do
 
     # 重新创建容器并移除孤立的容器
     log_message "INFO" "重新创建容器并移除孤立的容器..."
-    if docker compose -f "$file" up -d --remove-orphans 2>&1 | tee -a "$LOG_FILE"; then
+    if docker compose -f "$file" up -d --remove-orphans | tee -a "$LOG_FILE"; then
         log_message "INFO" "容器重新创建成功."
     else
         log_message "ERROR" "容器重新创建失败."
@@ -59,7 +59,7 @@ log_message "INFO" "============================================================
 log_message "INFO" "开始清理未使用的 Docker 镜像..."
 
 # 清理未使用的镜像
-docker image prune -a -f 2>&1 | tee -a "$LOG_FILE"
+docker image prune -a -f | tee -a "$LOG_FILE"
 
 # 检查是否有清理操作的错误
 if [ $? -eq 0 ]; then
